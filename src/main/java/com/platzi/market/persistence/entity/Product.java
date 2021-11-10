@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
@@ -29,6 +31,10 @@ public class Product {
     private Integer stock;
 
     private Boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "id_category", insertable = false, updatable = false)
+    private Category category;
 
     public Integer getIdProduct() {
         return idProduct;

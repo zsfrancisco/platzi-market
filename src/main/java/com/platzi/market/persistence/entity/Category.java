@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -19,6 +21,9 @@ public class Category {
     private String description;
 
     private Boolean status;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 
     public Integer getIdCategory() {
         return idCategory;
