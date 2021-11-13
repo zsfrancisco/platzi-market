@@ -29,7 +29,7 @@ public class ProductData {
     @Column(name = "id_category")
     private Integer idCategory;
 
-    private String barCode;
+    private String barcode;
 
     private BigDecimal price;
 
