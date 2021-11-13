@@ -1,14 +1,13 @@
 package com.platzi.market.persistence.crud;
 
-import com.platzi.market.persistence.entity.Product;
+import com.platzi.market.persistence.entity.ProductData;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface ProductCrudRepository extends CrudRepository<Product, Integer> {
+public interface ProductCrudRepository extends CrudRepository<ProductData, Integer> {
 
-    List<Product> findByIdCategoryOrderByNameAsc(int idCategory);
+    List<ProductData> findByIdCategoryOrderByNameAsc(int idCategory);
 
-    Optional<List<Product>> findByStockLessThanAndStatus(int stock, boolean status);
+    List<ProductData> findByStockLessThanAndStatus(int stock, boolean status);
 }
