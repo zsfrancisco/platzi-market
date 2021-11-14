@@ -2,6 +2,10 @@ package com.platzi.market.web.controller;
 
 import com.platzi.market.domain.Product;
 import com.platzi.market.domain.service.ProductService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +27,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping()
+    @ApiOperation("Get all supermarket products")
+    @ApiResponse(code = 200, message = "Products")
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity
                 .ok()
@@ -31,7 +37,14 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("id") int productId) {
+    @ApiOperation("Get supermarket product by product id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Product"),
+            @ApiResponse(code = 404, message = "Product not found"),
+    })
+    public ResponseEntity<Product> getProduct(
+            @ApiParam(value = "The id of the product", required = true, example = "7")
+            @PathVariable("id") int productId) {
         return productService.getProduct(productId)
                 .map(product -> ResponseEntity
                         .ok()
@@ -41,6 +54,8 @@ public class ProductController {
     }
 
     @GetMapping("/category/{id}")
+    @ApiOperation("Get all supermarket products by category id")
+    @ApiResponse(code = 200, message = "Products")
     public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable("id") int categoryId) {
         return ResponseEntity
                 .ok()
@@ -49,6 +64,8 @@ public class ProductController {
     }
 
     @PostMapping()
+    @ApiOperation("Save a new supermarket product")
+    @ApiResponse(code = 200, message = "Product created")
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -57,7 +74,14 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") int productId) {
+    @ApiOperation("Delete a supermarket product by product id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Product deleted"),
+            @ApiResponse(code = 404, message = "Product not found"),
+    })
+    public ResponseEntity<Void> deleteProduct(
+            @ApiParam(value = "The id of the product", required = true, example = "7")
+            @PathVariable("id") int productId) {
         return productService.deleteProduct(productId) ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.notFound().build();

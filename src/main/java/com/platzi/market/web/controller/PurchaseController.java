@@ -2,6 +2,8 @@ package com.platzi.market.web.controller;
 
 import com.platzi.market.domain.Purchase;
 import com.platzi.market.domain.service.PurchaseService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +24,8 @@ public class PurchaseController {
     private final PurchaseService purchaseService;
 
     @GetMapping()
+    @ApiOperation("Get all supermarket purchases")
+    @ApiResponse(code = 200, message = "Purchases")
     public ResponseEntity<List<Purchase>> getAllPurchases() {
         return ResponseEntity
                 .ok()
@@ -30,6 +34,8 @@ public class PurchaseController {
     }
 
     @GetMapping("/client/{id}")
+    @ApiOperation("Get all supermarket purchases by client id")
+    @ApiResponse(code = 200, message = "Purchases")
     public ResponseEntity<List<Purchase>> getPurchasesByClient(@PathVariable("id") String clientId) {
         return ResponseEntity
                 .ok()
@@ -38,6 +44,8 @@ public class PurchaseController {
     }
 
     @PostMapping()
+    @ApiOperation("Save a new supermarket purchase")
+    @ApiResponse(code = 200, message = "Purchase created")
     public ResponseEntity<Purchase> savePurchase(@RequestBody Purchase purchase) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
