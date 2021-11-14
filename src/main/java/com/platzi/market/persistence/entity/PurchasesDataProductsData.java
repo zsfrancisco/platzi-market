@@ -7,16 +7,17 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "purchases_products")
 @Getter
 @Setter
-public class PurchasesProducts {
+public class PurchasesDataProductsData {
 
     @EmbeddedId
-    private PurchasesProductsPK id;
+    private PurchasesDataProductsDataPK id;
 
     private Integer amount;
 
@@ -25,6 +26,7 @@ public class PurchasesProducts {
     private Boolean status;
 
     @ManyToOne
+    @MapsId("idPurchase")
     @JoinColumn(name = "id_purchase", insertable = false, updatable = false)
     private PurchaseData purchase;
 

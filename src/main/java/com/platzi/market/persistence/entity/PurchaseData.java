@@ -3,6 +3,7 @@ package com.platzi.market.persistence.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,8 +32,8 @@ public class PurchaseData {
 
     private LocalDateTime date;
 
-    @Column(name = "half_payment")
-    private String halfPayment;
+    @Column(name = "payment_method")
+    private String paymentMethod;
 
     private String comment;
 
@@ -42,6 +43,6 @@ public class PurchaseData {
     @JoinColumn(name = "id_client", insertable = false, updatable = false)
     private ClientData client;
 
-    @OneToMany(mappedBy = "purchase")
-    private List<PurchasesProducts> products;
+    @OneToMany(mappedBy = "purchase", cascade = {CascadeType.ALL})
+    private List<PurchasesDataProductsData> products;
 }
